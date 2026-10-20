@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #088B55;
+  --color-orange: #FF8D28;
+  --color-grey-2: #B9B9B9;
+  --color-grey: #69736F;
+  --color-primary-light: #C6E9D9;
+  --color-dark: #0D1822;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #2E2E2E;
+}
+
+.icon-green{
+  filter: invert(42%) sepia(28%) saturate(1541%) hue-rotate(108deg) brightness(91%) contrast(94%);
+}
+.icon-green-dark{
+  filter: invert(23%) sepia(10%) saturate(4234%) hue-rotate(108deg) brightness(96%) contrast(96%);
+}
+.icon-white{
+  filter: invert(99%) sepia(0%) saturate(7500%) hue-rotate(250deg) brightness(102%) contrast(102%);
+}
+.icon-grey{
+  filter: invert(72%) sepia(0%) saturate(329%) hue-rotate(236deg) brightness(84%) contrast(92%);
+  /* upd */
+}
+.icon-grey-light{
+  filter: invert(79%) sepia(0%) saturate(704%) hue-rotate(133deg) brightness(95%) contrast(100%);
+}
+.icon-grey-lighter{
+  filter: invert(95%) sepia(0%) saturate(22%) hue-rotate(165deg) brightness(86%) contrast(93%);
+}
+.icon-dark{
+    filter: invert(7%) sepia(19%) saturate(322%) hue-rotate(56deg) brightness(92%) contrast(90%);
+    /* upd */
+}
+.icon-danger{
+  filter: invert(51%) sepia(9%) saturate(2998%) hue-rotate(314deg) brightness(79%) contrast(74%);
+}
+.icon-red{
+  filter: invert(20%) sepia(70%) saturate(3512%) hue-rotate(349deg) brightness(94%) contrast(83%);
+}
+.icon-warn{
+  filter: invert(60%) sepia(46%) saturate(807%) hue-rotate(353deg) brightness(90%) contrast(102%);
+}
+.icon-blue{
+  filter: invert(30%) sepia(52%) saturate(7490%) hue-rotate(207deg) brightness(94%) contrast(101%);
+   /* upd */
+}
+.icon-blue-dark{
+  filter: invert(13%) sepia(9%) saturate(928%) hue-rotate(179deg) brightness(103%) contrast(90%);
+}
+.icon-grey-bluish{
+  filter: invert(73%) sepia(13%) saturate(276%) hue-rotate(201deg) brightness(90%) contrast(86%);
+}
+
+.card-border{
+  @apply border border-[#DDE5E1];
+}
+
+.card-border-light{
+  @apply border border-[#ECF1EE];
+}
+
+.divider{
+  @apply border-t border-[#DCE3DF];
+}
+
+.text-page-hint{
+  @apply text-grey mt-1.5 ml-1 text-[13px];
+}
+
+.bg-primary-linear{
+  background: linear-gradient(132.34deg, #0D1822 6.1%, #093F2E 100%);
+}
+
+.bg-primary-linear-button{
+  background: linear-gradient(132.34deg, #0D1822 6.1%, #093F2E 56.41%);
+}
