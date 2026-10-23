@@ -19,7 +19,7 @@ const props = defineProps<{
   name: string
 }>()
 
-const logo = computed(() => useBankLogo(props.src || '', true)?.value?.href || '')
+const logo = computed(() => useBankLogo(props.src || '', true)?.value || '')
 
 function getInitialsOfBank(bank: string) {
   return bank.trim().split(/\s+/).filter(Boolean).map(word => word[0]).join('')

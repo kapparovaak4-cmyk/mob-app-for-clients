@@ -9,6 +9,21 @@
   --color-dark: #0D1822;
 }
 
+@layer components {
+  .clickable {
+    @apply cursor-pointer select-none touch-manipulation
+      transition-[transform,background-color,border-color,opacity]
+      duration-150 ease-out
+      active:scale-[0.97]
+      disabled:active:scale-100
+      [-webkit-tap-highlight-color:transparent];
+  }
+}
+
+html.fonts-loading body {
+  visibility: hidden;
+}
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   color: #2E2E2E;

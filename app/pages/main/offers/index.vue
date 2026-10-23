@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import OffersList from "./OffersList.vue"
-import CertsList from "./CertsList.vue"
-import ArchiveOffersList from "./ArchiveOffersList.vue"
+import OffersList from "@/components/offers/OffersList.vue"
+import CertsList from "@/components/offers/CertsList.vue"
+import ArchiveOffersList from "@/components/offers/ArchiveOffersList.vue"
 
 definePageMeta({
   headerTitle: 'Мои расчёты',

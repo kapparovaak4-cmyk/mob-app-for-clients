@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Request } from './RequestCard.vue'
-import RequestCard from './RequestCard.vue'
+import type { Request } from '@/components/my-requests/RequestCard.vue'
+import RequestCard from '@/components/my-requests/RequestCard.vue'
 
 definePageMeta({
   headerTitle: 'Мои заявки',

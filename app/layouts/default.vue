@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-dvh bg-[#1E1E1E] flex justify-center">
-    <div class="relative w-full max-w-[430px] h-dvh bg-[#F7F9F8] flex flex-col overflow-hidden">
+  <div class="min-h-dvh flex justify-center">
+    <div class="relative w-full h-dvh bg-[#F7F9F8] flex flex-col overflow-hidden">
       <!-- Home header -->
       <header
         v-if="isHome"
@@ -50,7 +50,8 @@
       </main>
 
       <!-- Bottom navigation -->
-      <nav  class="shrink-0 h-[76px] px-4 pb-[env(safe-area-inset-bottom)] bg-white border-t border-[#EEF0EF]">
+      <nav  class="shrink-0 min-h-[76px] 
+      -fit px-4 pb-[env(safe-area-inset-bottom)] bg-white border-t border-[#EEF0EF]">
         <div class="h-full flex items-center justify-around">
           <NuxtLink
             v-for="item in navigation"
@@ -94,7 +95,7 @@ interface NavigationItem {
 
 const route = useRoute()
 const userName = 'ИМЯ Ф.'
-const isHome = computed(() => route.path === '/main')
+const isHome = computed(() => route.path === '/main' || route.path === '/main/')
 const newRequestCount = ref(1)
 
 const formattedRequestCount = computed(() => {
@@ -151,7 +152,6 @@ function selectTab(id: string) {
   navigateTo({
     path: route.path,
     query: route.query,
-    hash: `#${id}`,
   }, {
     replace: true,
   })

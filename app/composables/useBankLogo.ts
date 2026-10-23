@@ -1,4 +1,5 @@
 import { computed, type MaybeRefOrGetter } from "vue";
+import { usePublicAsset } from "@/composables/usePublicAsset"
 
 const bankLogosMap: Record<string, string> = {
   kjk: "/bank_logos/kjk_logo.png",
@@ -29,7 +30,7 @@ export function useBankLogo(bankName: MaybeRefOrGetter<string>, useDark?: boolea
     else if (typeof bankName === "string") path = (useDark && bankLogosMap[`${bankName}-dark`] ? bankLogosMap[`${bankName}-dark`] : bankLogosMap[bankName]) || '';
 
     if (!path) return null;
-    return new URL(path, import.meta.url);
+    return usePublicAsset(path);
   });
 
   return logo;

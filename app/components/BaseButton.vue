@@ -3,7 +3,15 @@
     :type="type"
     :disabled="isDisabled"
     :aria-label="ariaLabel || (iconOnly ? text : undefined)"
-    class="inline-flex items-center justify-center gap-2 transition-colors duration-200 cursor-pointer"
+    class="
+      inline-flex items-center justify-center gap-2
+      cursor-pointer select-none touch-manipulation
+      transition-[transform,background-color,color,opacity,border-color]
+      duration-150 ease-out
+      active:scale-[0.96]
+      disabled:active:scale-100
+      [-webkit-tap-highlight-color:transparent]
+    "
     :class="[
       variantClasses,
       sizeClasses,
@@ -106,12 +114,12 @@ const isDisabled = computed(() =>
 
 const variantClasses = computed(() => {
   const variants: Record<ButtonVariant, string> = {
-    primary: 'bg-primary text-white hover:opacity-80 disabled:bg-[#6DBB9F] disabled:text-white',
-    secondary: 'border border-[#DCE3DF] bg-[#F8FAF9] text-[#242424] hover:bg-[#F1F4F2] disabled:opacity-60',
-    ghost: 'bg-transparent text-[#242424] hover:bg-[#F5F5F5] disabled:opacity-50',
-    icon: 'bg-[#F5F5F5] text-[#A4A4A4] hover:bg-[#EBEBEB] disabled:opacity-50',
-    logout: 'bg-[#EDEDED] border border-[#C4C4C4] text-[#505050] hover:bg-[#E5E5E5] disabled:opacity-80',
-    login: 'bg-primary-linear-button border border-[#C4C4C4] text-[#F5F5F5] hover:bg-[#E5E5E5] disabled:opacity-80',
+    primary: 'bg-primary text-white hover:opacity-80 active:opacity-90 disabled:bg-[#6DBB9F] disabled:text-white',
+    secondary: 'border border-[#DCE3DF] bg-[#F8FAF9] text-[#242424] hover:bg-[#F1F4F2] active:bg-[#E8EFEB] disabled:opacity-60',
+    ghost: 'bg-transparent text-[#242424] hover:bg-[#F5F5F5] active:bg-[#EBEBEB] disabled:opacity-50',
+    icon: 'bg-[#F5F5F5] text-[#A4A4A4] hover:bg-[#EBEBEB] active:bg-[#E0E0E0] disabled:opacity-50',
+    logout: 'bg-[#EDEDED] border border-[#C4C4C4] text-[#505050] hover:bg-[#E5E5E5] active:bg-[#DADADA] disabled:opacity-80',
+    login: 'bg-primary-linear-button border border-[#C4C4C4] text-[#F5F5F5] hover:bg-[#E5E5E5] active:opacity-90 disabled:opacity-80',
   }
 
   return variants[props.variant]

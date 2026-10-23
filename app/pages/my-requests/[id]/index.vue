@@ -13,11 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import RequestDetailsCard from '@/pages/my-requests/RequestDetailsCard.vue'
-import RequestStatusHistory from '@/pages/my-requests/RequestStatusHistory.vue'
+import RequestDetailsCard from '@/components/my-requests/RequestDetailsCard.vue'
+import RequestStatusHistory from '@/components/my-requests/RequestStatusHistory.vue'
 
 definePageMeta({
   headerTitle: 'Информация о заявке',
+  backPath: '/my-requests',
 })
 
 const route = useRoute()

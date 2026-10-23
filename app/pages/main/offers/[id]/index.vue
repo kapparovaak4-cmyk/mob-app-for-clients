@@ -25,12 +25,12 @@
 
 <script setup lang="ts">
 import type { Step } from "@/components/BaseStepsLayout.vue"
-import LoanConditions from "./LoanConditions.vue"
-import Participants from "./Participants.vue"
-import PaymentTable from "./PaymentTable.vue"
-import AddingCollateral from "./AddingCollateral.vue"
-import SigningLoan from "./SigningLoan.vue"
-import Done from "./Done.vue"
+import LoanConditions from "@/components/offers/details/LoanConditions.vue"
+import Participants from "@/components/offers/details/Participants.vue"
+import PaymentTable from "@/components/offers/details/PaymentTable.vue"
+import AddingCollateral from "@/components/offers/details/AddingCollateral.vue"
+import SigningLoan from "@/components/offers/details/SigningLoan.vue"
+import Done from "@/components/offers/details/Done.vue"
 import { useSignOffer } from "~/store/signOffer.ts"
 
 definePageMeta({

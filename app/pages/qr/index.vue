@@ -1,9 +1,7 @@
 <template>
   <div class="fixed inset-0 z-50 bg-[#111]">
-    <div
-      class=" relative mx-auto h-dvh w-full max-w-[430px] overflow-hidden bg-black"
-    >
-      <!-- Camera -->
+    <div class=" relative mx-auto h-dvh w-full overflow-hidden bg-black">
+      <div v-if="cameraLoading && !cameraError" class="absolute z-10 inset-0 size-full bg-black"></div>
       <video
         ref="videoRef"
         autoplay
@@ -11,37 +9,12 @@
         playsinline
         class="absolute inset-0 size-full object-cover"
       />
-
-      <!-- Dark camera overlay -->
       <div class="absolute inset-0 bg-black/40" />
 
-      <!-- Camera error -->
-      <div
-        v-if="cameraError"
-        class="absolute inset-0 z-30 flex items-center justify-center bg-[#111] px-8 text-center"
-      >
-        <div>
-          <p class="text-[16px] font-semibold text-white">
-            Не удалось открыть камеру
-          </p>
-          {{ stream }}
+      <!-- <CameraLoading v-if="cameraLoading && !cameraError" /> -->
+      <CameraError v-if="cameraError" @retry="startCamera" />
 
-          <p class="mt-2 text-[13px] text-white/60">
-            Разрешите доступ к камере в настройках браузера
-          </p>
-
-          <BaseButton
-            text="Попробовать снова"
-            class="mt-5"
-            @click="startCamera"
-          />
-        </div>
-      </div>
-
-      <!-- Header -->
-      <header
-        class="absolute inset-x-0 top-0 z-20 flex h-[72px] items-center justify-center px-5"
-      >
+      <header class="absolute inset-x-0 top-0 z-20 flex h-[72px] items-center justify-center px-5">
         <h1 class="text-[16px] font-semibold text-white">
           Подписание через QR
         </h1>
@@ -61,12 +34,7 @@
       </header>
 
       <!-- Scanner content -->
-      <main
-        class="
-          absolute inset-x-0 top-[120px] z-10
-          flex flex-col items-center
-        "
-      >
+      <main class="absolute inset-x-0 top-[120px] z-20 flex flex-col items-center">
         <!-- Logo -->
         <div class="flex items-center gap-1.5 text-white">
           <BaseIcon
@@ -131,9 +99,10 @@
 </template>
 
 <script setup lang="ts">
-import QrInstructionsSheet from "./QrInstructionsSheet.vue"
-const router = useRouter()
+import QrInstructionsSheet from "@/components/qr/QrInstructionsSheet.vue"
+import CameraError from "@/components/qr/CameraError.vue"
 
+const router = useRouter()
 const videoRef = ref<HTMLVideoElement | null>(null)
 
 const instructionsOpen = ref(false)
@@ -142,52 +111,44 @@ const torchEnabled = ref(false)
 
 let stream: MediaStream | null = null
 let videoTrack: MediaStreamTrack | null = null
-
-const steps = [
-  {
-    title: 'Сканируйте код',
-    description:
-      'Камера автоматически распознает зашифрованную ссылку',
-  },
-  {
-    title: 'Дайте согласие',
-    description:
-      'Подтвердите условия использования электронной подписи',
-  },
-  {
-    title: 'Подпишите быстро',
-    description:
-      'Документы будут заверены в течение нескольких секунд',
-  },
-]
+const cameraLoading = ref(true)
 
 async function startCamera() {
+  stopCamera()
+  cameraLoading.value = true
   cameraError.value = false
 
   try {
-    stopCamera()
+    if (!navigator.mediaDevices?.getUserMedia) {
+      throw new Error('Camera API is not available')
+    }
 
-    stream = await navigator?.mediaDevices?.getUserMedia({
+    stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
-        facingMode: {
-          ideal: 'environment',
-        },
+        facingMode: { ideal: 'environment' },
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
       },
     })
-    console.log(stream);
-    
 
-    videoTrack = stream?.getVideoTracks()[0] ?? null
+    videoTrack = stream.getVideoTracks()[0] ?? null
 
-    if (videoRef.value) {
-      videoRef.value.srcObject = stream
-      await videoRef.value.play()
+    if (!videoRef.value) {
+      throw new Error('Video element is not available')
     }
+
+    videoRef.value.srcObject = stream
+    await videoRef.value.play()
+
+    console.log('Camera started:', videoTrack?.getSettings())
   }
   catch (error) {
     console.error('Camera error:', error)
+    stopCamera()
     cameraError.value = true
+  } finally {
+    cameraLoading.value = false
   }
 }
 

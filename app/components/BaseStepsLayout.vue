@@ -4,7 +4,7 @@
       <!-- Header -->
       <header class="shrink-0 px-3 pt-4 pb-3">
         <div class="flex items-center justify-between">
-          <div class="bg-white p-2 rounded-full border border-[#F2F2F2]" @click="handleBack">
+          <div class="bg-white p-2 rounded-full border border-[#F2F2F2] clickable" @click="handleBack">
             <BaseIcon name="arrow-left" class="icon-md hover:opacity-80 cursor-pointer"/>
           </div>
 
@@ -17,7 +17,7 @@
             </p>
           </div>
 
-          <div class="bg-white p-2 rounded-full border border-[#F2F2F2]" @click="$emit('close')">
+          <div class="bg-white p-2 rounded-full border border-[#F2F2F2] clickable" @click="$emit('close')">
             <BaseIcon name="close" class="icon-danger icon-md hover:opacity-80 cursor-pointer"/>
           </div>
         </div>

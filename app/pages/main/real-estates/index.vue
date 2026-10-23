@@ -7,7 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import ReatEstateCard, { type Property } from './ReatEstateCard.vue'
+import { definePageMeta } from '#imports';
+import ReatEstateCard, { type Property } from '@/components/real-estates/ReatEstateCard.vue'
 
 definePageMeta({
   headerTitle: 'Мои оценки',
